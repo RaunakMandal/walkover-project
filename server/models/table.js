@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 var Fields = new mongoose.Schema({
   type: String,
   name: String,
+  isPrimary: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 var Rows = new mongoose.Schema({
@@ -11,6 +15,7 @@ var Rows = new mongoose.Schema({
 
 var Table = new mongoose.Schema(
   {
+    tableName: String,
     userID: String,
     fields: [Fields],
     rows: [Rows],

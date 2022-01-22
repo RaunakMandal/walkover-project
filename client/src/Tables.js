@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Base from "./Base";
 import "./styles.css";
 
@@ -13,16 +13,18 @@ const Tables = () => {
       {isAuthenticated ? (
         <div>
           <p>Hey {user.nickname}, You're logged in! Tables show here</p>
-          <button>Add table</button>
+          <Link to="/add">
+            <button className="btn btn-primary">Add Table</button>
+          </Link>
         </div>
       ) : (
         <div>
           <p>
             Please{" "}
-            <a href="/" onClick={loginWithRedirect}>
-              login
-            </a>{" "}
-            to continue
+            <Link to="/add">
+              <button className="btn btn-primary">Login</button>
+            </Link>{" "}
+            to add a table
           </p>
         </div>
       )}
