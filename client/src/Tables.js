@@ -10,7 +10,6 @@ import axios from "axios";
 const Tables = () => {
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();
   console.log("User: ", user);
-
   let shouldReload = isAuthenticated;
   const [tables, setTables] = useState([]);
   const fetchData = async () => {
@@ -40,9 +39,11 @@ const Tables = () => {
             ? tables.map((element) => (
                 <Card key={element._id}>
                   <Card.Body>
-                    <Card.Title className="mb-2 text-muted">
-                      {element.tableName}
-                    </Card.Title>
+                    <Link to={`/view/${element._id}`}>
+                      <Card.Title className="mb-2 text-muted">
+                        {element.tableName}
+                      </Card.Title>
+                    </Link>
                   </Card.Body>
                 </Card>
               ))

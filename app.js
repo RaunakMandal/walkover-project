@@ -23,6 +23,3 @@ mongoose
   .then(() => {
     console.log("DB Connected");
   });
-app.get("/", (req, res) => {
-  console.log("F");
-});

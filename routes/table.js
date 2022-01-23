@@ -1,6 +1,13 @@
 const express = require("express");
-const { addTable, tableByuser } = require("../controllers/table");
+const {
+  addTable,
+  tableByUser,
+  tableById,
+  deleteTable,
+} = require("../controllers/table");
 const router = express.Router();
 router.post("/addTable", addTable);
-router.get("/tables/:user", tableByuser);
+router.get("/tables/:user", tableByUser);
+router.get("/table/:id", tableById);
+router.delete("/delete/:id", deleteTable);
 module.exports = router;
