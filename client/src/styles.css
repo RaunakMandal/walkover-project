@@ -14,3 +14,56 @@ footer {
   right: 0px;
   left: 0px;
 }
+#tn {
+  font-size: 30px;
+
+}
+#bttn1{
+  border-radius: 5px;
+  background-color: #45a049;
+  padding: 20px;
+  width:100%;
+  color: white;
+
+
+}
+#rmbtn{
+  border-radius: 5px;
+  background-color: #45a049;
+  padding: 20px;
+  width:100%;
+  color: white;
+
+}
+
+#div1 , #div2 , #div3 , #div4 , #div4 , #div5 , #div7 , #div8{
+  border-radius: 5px;
+  background-color: #181616;
+  padding: 20px;
+}
+input, select{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(15, 15, 15);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#bttn2,#bttn3{
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#bttn2,#bttn3 :hover{
+
+  background-color: #45a049;
+}
+
