@@ -3,10 +3,7 @@ const mongoose = require("mongoose");
 var Fields = new mongoose.Schema({
   type: String,
   name: String,
-  isPrimary: {
-    type: Boolean,
-    default: false,
-  },
+  primary: Boolean,
 });
 
 var Rows = new mongoose.Schema({

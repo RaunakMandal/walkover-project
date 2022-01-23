@@ -1,6 +1,5 @@
 import React from "react";
 import Menu from "./Menu";
-console.log("Base");
 const Base = ({ className = "bg-dark text-white p-4", children }) => (
   <div>
     <Menu />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Base from "./Base";
 import "./styles.css";
+import { Card } from "react-bootstrap";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
@@ -10,18 +11,21 @@ const Tables = () => {
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();
   console.log("User: ", user);
 
+  let shouldReload = isAuthenticated;
   const [tables, setTables] = useState([]);
-
   const fetchData = async () => {
-    axios
-      .get("http://localhost:8000/tables")
+    await axios
+      .get(`http://localhost:8000/tables/${user.nickname}`)
       .then((res) => setTables(res.data))
       .catch((err) => console.log("Not work", err));
   };
-
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (shouldReload) {
+      fetchData();
+      shouldReload = false;
+    }
+  }, [shouldReload]);
+
   return (
     <Base>
       {isAuthenticated ? (
@@ -31,20 +35,18 @@ const Tables = () => {
             <button className="btn btn-primary">Add Table</button>
           </Link>
           <br></br>
+          <h1>{tables.length}</h1>
           {tables.length > 0
             ? tables.map((element) => (
-                // <p key={element.id}>{element._id}</p>
-
-                <div className="card" style="width: 18rem;">
-                  {/* <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">
-                      Card subtitle
-                    </h6>
-                  </div> */}
-                </div>
+                <Card key={element._id}>
+                  <Card.Body>
+                    <Card.Title className="mb-2 text-muted">
+                      {element.tableName}
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
               ))
-            : `No tables yet and ${tables.length}`}
+            : "No tables yet"}
         </div>
       ) : (
         <div>
