@@ -3,6 +3,7 @@ import Base from "./Base";
 import { useAuth0 } from "@auth0/auth0-react";
 import "axios";
 import axios from "axios";
+import "./styles.css"
 
 const AddTable = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -50,27 +51,27 @@ const AddTable = () => {
   return (
     <Base>
       <form onSubmit={handleSubmit}>
-        <div className="row g-3 align-items-center">
-          <div className="col-auto">
-            <label className="col-form-label">Table Name</label>
+        <div id="div1" className="row g-3 align-items-center">
+          <div  id="div2"  className="col-auto">
+            <label id ="tn" className="col-form-label">Table Name</label>
           </div>
-          <div className="col-auto">
-            <input type="text" id="tablename" className="form-control"></input>
+          <div  id="div3" className="col-auto">
+            <input id = "text1" type="text" id="tablename" className="form-control"></input>
           </div>
         </div>
         {inputList.map((element, index) => {
           return (
-            <div key={index}>
-              <div className="row g-3 align-items-center">
-                <div className="col-sm-4">
-                  <input
+            <div  id="div4" className="main" key={index}>
+              <div  id="div5" className="row g-3 align-items-center">
+                <div  id="div6" className="col-sm-4">
+                  <input id = "text2"
                     name="name"
                     placeholder="Enter Field Name"
                     value={element.name}
                     onChange={(e) => handleInputChange(e, index)}
                   />
                 </div>
-                <div className="col-sm-4">
+                <div  id="div7" className="col-sm-4">
                   <select
                     name="type"
                     value={element.type}
@@ -86,30 +87,31 @@ const AddTable = () => {
                     <option value="DateTime">DateTime</option>
                   </select>
                 </div>
-                <div className="col-sm-4">
+                <div  id="div8" className="col-sm-4">
                   {index ? (
                     <button
                       type="button"
-                      className="button remove"
+                      id="rmbtn"className="button remove"
                       onClick={() => handleRemoveClick(index)}
                     >
                       Remove
                     </button>
                   ) : null}
+                  <button
+            id = "bttn1"
+            type="button"
+            onClick={() => handleAddClick()}
+          >
+            Add
+          </button>
                 </div>
               </div>
             </div>
           );
         })}
         <div className="button-section">
-          <button
-            className="button add"
-            type="button"
-            onClick={() => handleAddClick()}
-          >
-            Add
-          </button>
-          <button className="button submit" type="submit">
+          
+          <button  id = "bttn3" type="submit">
             Submit
           </button>
         </div>
