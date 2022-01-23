@@ -16,32 +16,24 @@ footer {
 }
 #tn {
   font-size: 30px;
-
 }
-#bttn1{
+#bttn1 {
   border-radius: 5px;
   background-color: #45a049;
   padding: 20px;
-  width:100%;
+  width: 100%;
   color: white;
-
-
 }
-#rmbtn{
+#rmbtn {
   border-radius: 5px;
   background-color: #45a049;
   padding: 20px;
-  width:100%;
+  width: 100%;
   color: white;
-
 }
 
-#div1 , #div2 , #div3 , #div4 , #div4 , #div5 , #div7 , #div8{
-  border-radius: 5px;
-  background-color: #181616;
-  padding: 20px;
-}
-input, select{
+input,
+select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -51,9 +43,9 @@ input, select{
   box-sizing: border-box;
 }
 
-#bttn2,#bttn3{
-  width: 100%;
-  background-color: #4CAF50;
+#bttn2,
+#bttn3 {
+  background-color: #4caf50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -61,9 +53,3 @@ input, select{
   border-radius: 4px;
   cursor: pointer;
 }
-
-#bttn2,#bttn3 :hover{
-
-  background-color: #45a049;
-}
-

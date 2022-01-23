@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import Base from "./Base";
 import { useAuth0 } from "@auth0/auth0-react";
-import "axios";
 import axios from "axios";
-import "./styles.css"
+import "./styles.css";
+import Switch from "react-switch";
 
 const AddTable = () => {
   const { isAuthenticated, user } = useAuth0();
-  const [inputList, setInputList] = useState([{ name: "", type: "" }]);
+  let tableN = "";
+  const [inputList, setInputList] = useState([
+    { name: "", type: "", primary: false },
+  ]);
 
+  const handleSwitch = (checked, index) => {
+    let newList = [...inputList];
+    newList[index].primary = checked;
+    setInputList(newList);
+  };
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -26,21 +34,25 @@ const AddTable = () => {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { name: "", type: "" }]);
+    setInputList([...inputList, { name: "", type: "", primary: false }]);
   };
 
   let handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("tablename", tableN);
+
     alert(JSON.stringify(inputList));
     isAuthenticated
       ? await axios
           .post("http://localhost:8000/addTable", {
-            tableName: "Test",
+            tableName: tableN,
             userID: user.nickname,
             fields: inputList,
           })
           .then((res) => {
             console.log(res);
+            setInputList([{ name: "", type: "", primary: false }]);
+            document.getElementById("mainForm").reset();
           })
           .catch((err) => {
             console.log(err);
@@ -50,28 +62,33 @@ const AddTable = () => {
 
   return (
     <Base>
-      <form onSubmit={handleSubmit}>
-        <div id="div1" className="row g-3 align-items-center">
-          <div  id="div2"  className="col-auto">
-            <label id ="tn" className="col-form-label">Table Name</label>
+      <form onSubmit={handleSubmit} id="mainForm">
+        <div className="row align-items-center">
+          <div className="col-auto">
+            <h1 className="col-form-label">Table Name</h1>
           </div>
-          <div  id="div3" className="col-auto">
-            <input id = "text1" type="text" id="tablename" className="form-control"></input>
+          <div className="col-auto">
+            <input
+              placeholder="Enter Table Name"
+              type="text"
+              className="form-control"
+              onChange={(e) => (tableN = e.target.value)}
+            ></input>
           </div>
         </div>
         {inputList.map((element, index) => {
           return (
-            <div  id="div4" className="main" key={index}>
-              <div  id="div5" className="row g-3 align-items-center">
-                <div  id="div6" className="col-sm-4">
-                  <input id = "text2"
+            <div className="container" key={index}>
+              <div className="row align-items-center">
+                <div className="col">
+                  <input
                     name="name"
                     placeholder="Enter Field Name"
                     value={element.name}
                     onChange={(e) => handleInputChange(e, index)}
                   />
                 </div>
-                <div  id="div7" className="col-sm-4">
+                <div className="col">
                   <select
                     name="type"
                     value={element.type}
@@ -87,31 +104,43 @@ const AddTable = () => {
                     <option value="DateTime">DateTime</option>
                   </select>
                 </div>
-                <div  id="div8" className="col-sm-4">
+                <div className="col">
+                  <label>
+                    <div className="col align-items-center">
+                      <span>Primary Key?</span>
+                      <Switch
+                        name="primary"
+                        value={element.primary}
+                        checked={element.primary}
+                        onChange={(e) => handleSwitch(e, index)}
+                      />
+                    </div>
+                  </label>
+                </div>
+                <div className="col">
                   {index ? (
                     <button
                       type="button"
-                      id="rmbtn"className="button remove"
+                      className="btn btn-danger"
                       onClick={() => handleRemoveClick(index)}
                     >
                       Remove
                     </button>
                   ) : null}
                   <button
-            id = "bttn1"
-            type="button"
-            onClick={() => handleAddClick()}
-          >
-            Add
-          </button>
+                    type="button"
+                    className="btn btn-success"
+                    onClick={() => handleAddClick()}
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
             </div>
           );
         })}
-        <div className="button-section">
-          
-          <button  id = "bttn3" type="submit">
+        <div className="col justify-contents-center">
+          <button type="submit" className="btn btn-success">
             Submit
           </button>
         </div>
