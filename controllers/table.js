@@ -7,7 +7,7 @@ exports.addTable = (req, res) => {
     if (err) {
       return res.status(400).send(err);
     }
-    res.json(table);
+    return res.json(table);
   });
 };
 
@@ -17,7 +17,7 @@ exports.tableByUser = (req, res) => {
     if (err) {
       return res.status(400).send(err);
     }
-    res.json(table);
+    return res.json(table);
   });
 };
 
@@ -26,7 +26,7 @@ exports.tableById = (req, res) => {
     if (err) {
       return res.status(400).send(err);
     }
-    res.json(table);
+    return res.json(table);
   });
 };
 
@@ -35,6 +35,22 @@ exports.deleteTable = (req, res) => {
     if (err) {
       return res.status(400).send(err);
     }
-    res.json({ success: true });
+    return res.json({ success: true });
   });
+};
+
+exports.addRow = (req, res) => {
+  // ok
+  console.log(req.body);
+  Table.findByIdAndUpdate(
+    req.params.id,
+    { $push: { rows: req.body } },
+    { new: true },
+    (err, table) => {
+      if (err) {
+        return res.status(400).send(err);
+      }
+      return res.json(table);
+    }
+  );
 };
