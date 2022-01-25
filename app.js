@@ -15,6 +15,10 @@ app.use(bodyparser);
 app.use(express.urlencoded({ extended: false }));
 app.use("/", route);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 mongoose
   .connect(process.env.DB_URL, {
     useNewUrlParser: true,
