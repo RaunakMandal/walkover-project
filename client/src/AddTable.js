@@ -64,7 +64,7 @@ const AddTable = () => {
     } else {
       isAuthenticated
         ? await axios
-            .post("http://localhost:8000/addTable", {
+            .post("https://walkover-tableapp.herokuapp.com/api/addTable", {
               tableName: tableN,
               userID: user.nickname,
               fields: inputList,

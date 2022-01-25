@@ -9,7 +9,7 @@ const TableView = (props) => {
   const [table, setTable] = useState({});
   const getTable = async () => {
     await axios
-      .get(`http://localhost:8000/table/${_id}`)
+      .get(`https://walkover-tableapp.herokuapp.com/api/table/${_id}`)
       .then((res) => setTable(res.data))
       .catch((err) => console.log("Not work", err));
   };
@@ -26,7 +26,9 @@ const TableView = (props) => {
 
   console.log(table.fields?.length);
   const deleteTable = async () => {
-    const res = await axios.delete(`http://localhost:8000/delete/${_id}`);
+    const res = await axios.delete(
+      `https://walkover-tableapp.herokuapp.com/api/delete/${_id}`
+    );
     console.log(res.status);
     if (res.status == 200) {
       return <Redirect to="/" />;
@@ -36,7 +38,9 @@ const TableView = (props) => {
   const addToRow = async () => {
     console.log(row);
     await axios
-      .post(`http://localhost:8000/addRow/${_id}`, { row })
+      .post(`https://walkover-tableapp.herokuapp.com/api/addRow/${_id}`, {
+        row,
+      })
       .then((res) => console.log(res), window.location.reload())
       .catch();
   };

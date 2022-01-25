@@ -13,15 +13,15 @@ app.use(cors());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use(bodyparser);
 app.use(express.urlencoded({ extended: false }));
-app.use("/", route);
+app.use("/api", route);
 
 // require(".//client/build/index.html");
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(".//client/build/index.html")); // serve the static react app
-  app.get(/^\/(?!api).*/, (req, res) => {
+  app.use(express.static(".//client/build/")); // serve the static react app
+  app.get("/*", (req, res) => {
     // don't serve api routes to react app
-    res.sendFile(path.join(__dirname, ".//client/build/index.html"));
+    res.send(req.url + " is not a valid route");
   });
   console.log("Serving React App...");
 }

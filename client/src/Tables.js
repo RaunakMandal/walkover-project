@@ -14,7 +14,9 @@ const Tables = () => {
   const [tables, setTables] = useState([]);
   const fetchData = async () => {
     await axios
-      .get(`http://localhost:8000/tables/${user.nickname}`)
+      .get(
+        `https://walkover-tableapp.herokuapp.com/api/tables/${user.nickname}`
+      )
       .then((res) => setTables(res.data))
       .catch((err) => console.log("Not work", err));
   };
